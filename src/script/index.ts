@@ -1,29 +1,53 @@
-declare const MaterialColorUtilities: {
-    materialDynamicColors: (seed: string) => Promise<any>;
-};
-interface MaterialColorPalette {
+// @ts-ignore
+import * as MaterialColorUtilities from "https://cdn.jsdelivr.net/npm/material-dynamic-colors@1.1.2/dist/cdn/material-dynamic-colors.min.js";
+
+interface ColorScheme {
+    primary: string;
+    onPrimary: string;
+    primaryContainer: string;
+    onPrimaryContainer: string;
+    secondary: string;
+    onSecondary: string;
+    secondaryContainer: string;
+    onSecondaryContainer: string;
+    tertiary: string;
+    onTertiary: string;
+    tertiaryContainer: string;
+    onTertiaryContainer: string;
+    error: string;
+    onError: string;
+    errorContainer: string;
+    onErrorContainer: string;
+    background: string;
+    onBackground: string;
+    surface: string;
+    onSurface: string;
+    surfaceVariant: string;
+    onSurfaceVariant: string;
+    outline: string;
+}
+
+interface Palette {
     seed: string;
-    light: Record<string, string>;
-    dark: Record<string, string>;
+    light: ColorScheme;
+    dark: ColorScheme;
 }
 
 interface PatternCardElement extends HTMLDivElement {
-    paletteData: MaterialColorPalette;
+    paletteData: Palette;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const patternList = document.getElementById('pattern-list') as HTMLElement;
-    const darkModeToggle = document.getElementById('darkModeToggle') as HTMLInputElement;
-    const generateMoreBtn = document.getElementById('generate-more-btn') as HTMLButtonElement;
-    const toast = document.getElementById('toast-notification') as HTMLElement;
-
+    const patternList = document.getElementById('pattern-list') as HTMLDivElement;
+    const darkModeToggle = document.getElementById('darkModeToggle') as HTMLInputElement | null;
+    const generateMoreBtn = document.getElementById('generate-more-btn') as HTMLButtonElement | null;
+    const toast = document.getElementById('toast-notification') as HTMLDivElement;
     let favorites: string[] = JSON.parse(localStorage.getItem('md3-favorites') || '[]');
     let currentActiveCard: PatternCardElement | null = null;
 
-    const generateRandomHex = (): string =>
-        `#${Math.floor(Math.random() * 0xFFFFFF).toString(16).padStart(6, '0').toUpperCase()}`;
+    const generateRandomHex = (): string => `#${Math.floor(Math.random() * 0xFFFFFF).toString(16).padStart(6, '0').toUpperCase()}`;
 
-    const renderPatternCard = (palette: MaterialColorPalette): void => {
+    const renderPatternCard = (palette: Palette): void => {
         const card = document.createElement('div') as PatternCardElement;
         card.className = 'pattern-card';
         card.dataset.seed = palette.seed;
@@ -50,9 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
         patternList.appendChild(card);
     };
 
-    const updateMockup = (palette: MaterialColorPalette): void => {
+    const updateMockup = (palette: Palette): void => {
         const theme = document.documentElement.classList.contains('dark-theme') ? 'dark' : 'light';
-        const colors = palette[theme];
+        const colors = palette[theme as 'light' | 'dark'];
         for (const [key, value] of Object.entries(colors)) {
             const property = `--md-sys-color-${key.replace(/([A-Z])/g, '-$1').toLowerCase()}`;
             document.documentElement.style.setProperty(property, value);
@@ -77,13 +101,13 @@ document.addEventListener('DOMContentLoaded', () => {
         URL.revokeObjectURL(url);
     };
 
-    const handleExportJson = (palette: MaterialColorPalette): void => {
+    const handleExportJson = (palette: Palette): void => {
         downloadFile('palette.json', JSON.stringify(palette, null, 2), 'application/json;charset=utf-8');
         showToast('Exported palette.json');
     };
 
-    const handleExportKt = (palette: MaterialColorPalette): void => {
-        const formatColor = (hex: string) => `Color(0xFF${hex.substring(1)})`;
+    const handleExportKt = (palette: Palette): void => {
+        const formatColor = (hex: string): string => `Color(0xFF${hex.substring(1)})`;
 
         const lightColors = `
 private val LightColors = lightColorScheme(
@@ -139,21 +163,13 @@ private val DarkColors = darkColorScheme(
     outline = ${formatColor(palette.dark.outline)}
 )`;
 
-        const fileContent = `package com.example.yourapp.ui.theme
+        const fileContent = `package com.example.yourapp.ui.theme\n\nimport androidx.compose.material3.lightColorScheme\nimport androidx.compose.material3.darkColorScheme\nimport androidx.compose.ui.graphics.Color\n\n${lightColors}\n\n${darkColors}\n`;
 
-import androidx.compose.material3.lightColorScheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.ui.graphics.Color
-
-${lightColors}
-
-${darkColors}
-`;
         downloadFile('ColorScheme.kt', fileContent, 'text/plain;charset=utf-8');
         showToast('Exported to ColorScheme.kt');
     };
 
-    const handleFavorite = (seed: string, btn: HTMLElement): void => {
+    const handleFavorite = (seed: string, btn: HTMLButtonElement): void => {
         const icon = btn.querySelector('.material-icons') as HTMLElement;
         const idx = favorites.indexOf(seed);
         if (idx > -1) {
@@ -175,10 +191,9 @@ ${darkColors}
 
     patternList.addEventListener('click', (e: MouseEvent) => {
         const target = e.target as HTMLElement;
-        const card = target.closest('.pattern-card') as PatternCardElement;
+        const card = target.closest('.pattern-card') as PatternCardElement | null;
         if (!card) return;
-
-        const actionBtn = target.closest('.action-btn') as HTMLElement | null;
+        const actionBtn = target.closest('.action-btn') as HTMLButtonElement | null;
         if (actionBtn) {
             e.stopPropagation();
             const palette = card.paletteData;
@@ -187,22 +202,20 @@ ${darkColors}
             if (actionBtn.classList.contains('favorite-btn')) handleFavorite(palette.seed, actionBtn);
             return;
         }
-
         currentActiveCard?.classList.remove('active');
         card.classList.add('active');
         currentActiveCard = card;
         updateMockup(card.paletteData);
     });
 
-    const generateInitialPatterns = async (count = 20): Promise<void> => {
+    const generateInitialPatterns = async (count = 20) => {
         patternList.innerHTML = '';
         for (let i = 0; i < count; i++) {
             const seed = generateRandomHex();
-            const palette = await MaterialColorUtilities.materialDynamicColors(seed);
-            palette.seed = seed; // Add seed manually
+            const palette: Palette = await (MaterialColorUtilities.materialDynamicColors(seed) as Promise<Palette>);
             renderPatternCard(palette);
         }
-        const firstCard = patternList.querySelector('.pattern-card') as PatternCardElement;
+        const firstCard = patternList.querySelector('.pattern-card') as PatternCardElement | null;
         if (firstCard) firstCard.click();
     };
 

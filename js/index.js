@@ -1,4 +1,5 @@
-"use strict";
+// @ts-ignore
+import * as MaterialColorUtilities from "https://cdn.jsdelivr.net/npm/material-dynamic-colors@1.1.2/dist/cdn/material-dynamic-colors.min.js";
 document.addEventListener('DOMContentLoaded', () => {
     const patternList = document.getElementById('pattern-list');
     const darkModeToggle = document.getElementById('darkModeToggle');
@@ -114,16 +115,7 @@ private val DarkColors = darkColorScheme(
     onSurfaceVariant = ${formatColor(palette.dark.onSurfaceVariant)},
     outline = ${formatColor(palette.dark.outline)}
 )`;
-        const fileContent = `package com.example.yourapp.ui.theme
-
-import androidx.compose.material3.lightColorScheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.ui.graphics.Color
-
-${lightColors}
-
-${darkColors}
-`;
+        const fileContent = `package com.example.yourapp.ui.theme\n\nimport androidx.compose.material3.lightColorScheme\nimport androidx.compose.material3.darkColorScheme\nimport androidx.compose.ui.graphics.Color\n\n${lightColors}\n\n${darkColors}\n`;
         downloadFile('ColorScheme.kt', fileContent, 'text/plain;charset=utf-8');
         showToast('Exported to ColorScheme.kt');
     };
@@ -174,7 +166,6 @@ ${darkColors}
         for (let i = 0; i < count; i++) {
             const seed = generateRandomHex();
             const palette = await MaterialColorUtilities.materialDynamicColors(seed);
-            palette.seed = seed; // Add seed manually
             renderPatternCard(palette);
         }
         const firstCard = patternList.querySelector('.pattern-card');
