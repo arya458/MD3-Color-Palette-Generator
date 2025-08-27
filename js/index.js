@@ -139,11 +139,12 @@ private val DarkColors = darkColorScheme(
             updateMockup(currentActiveCard.paletteData);
     });
     patternList.addEventListener('click', (e) => {
-        const target = e.target;
-        const card = target.closest('.pattern-card');
+        // @ts-ignore
+        const card = e.target.closest('.pattern-card');
         if (!card)
             return;
-        const actionBtn = target.closest('.action-btn');
+        // @ts-ignore
+        const actionBtn = e.target.closest('.action-btn');
         if (actionBtn) {
             e.stopPropagation();
             const palette = card.paletteData;
@@ -169,6 +170,7 @@ private val DarkColors = darkColorScheme(
             renderPatternCard(palette);
         }
         const firstCard = patternList.querySelector('.pattern-card');
+        // @ts-ignore
         if (firstCard)
             firstCard.click();
     };

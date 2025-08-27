@@ -1,3 +1,4 @@
+
 interface ColorScheme {
     primary: string;
     onPrimary: string;
@@ -23,7 +24,6 @@ interface ColorScheme {
     onSurfaceVariant: string;
     outline: string;
 }
-
 interface Palette {
     seed: string;
     light: ColorScheme;
@@ -35,16 +35,15 @@ interface PatternCardElement extends HTMLDivElement {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const patternList = document.getElementById('pattern-list') as HTMLDivElement;
-    const darkModeToggle = document.getElementById('darkModeToggle') as HTMLInputElement | null;
-    const generateMoreBtn = document.getElementById('generate-more-btn') as HTMLButtonElement | null;
-    const toast = document.getElementById('toast-notification') as HTMLDivElement;
+    const patternList = document.getElementById('pattern-list');
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const generateMoreBtn = document.getElementById('generate-more-btn');
+    const toast = document.getElementById('toast-notification');
     let favorites: string[] = JSON.parse(localStorage.getItem('md3-favorites') || '[]');
     let currentActiveCard: PatternCardElement | null = null;
+    const generateRandomHex = () => `#${Math.floor(Math.random() * 0xFFFFFF).toString(16).padStart(6, '0').toUpperCase()}`;
 
-    const generateRandomHex = (): string => `#${Math.floor(Math.random() * 0xFFFFFF).toString(16).padStart(6, '0').toUpperCase()}`;
-
-    const renderPatternCard = (palette: Palette): void => {
+     const renderPatternCard = (palette: Palette): void => {
         const card = document.createElement('div') as PatternCardElement;
         card.className = 'pattern-card';
         card.dataset.seed = palette.seed;
@@ -68,12 +67,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
         `;
-        patternList.appendChild(card);
+        patternList!.appendChild(card);
     };
 
     const updateMockup = (palette: Palette): void => {
         const theme = document.documentElement.classList.contains('dark-theme') ? 'dark' : 'light';
-        const colors = palette[theme as 'light' | 'dark'];
+        const colors = palette[theme];
         for (const [key, value] of Object.entries(colors)) {
             const property = `--md-sys-color-${key.replace(/([A-Z])/g, '-$1').toLowerCase()}`;
             document.documentElement.style.setProperty(property, value);
@@ -81,13 +80,13 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const showToast = (msg: string): void => {
-        toast.textContent = msg;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 3000);
+        toast!.textContent = msg;
+        toast!.classList.add('show');
+        setTimeout(() => toast!.classList.remove('show'), 3000);
     };
 
     const downloadFile = (filename: string, content: string, mime: string): void => {
-        const blob = new Blob([content], { type: mime });
+        const blob = new Blob([content], {type: mime});
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
@@ -103,8 +102,9 @@ document.addEventListener('DOMContentLoaded', () => {
         showToast('Exported palette.json');
     };
 
+
     const handleExportKt = (palette: Palette): void => {
-        const formatColor = (hex: string): string => `Color(0xFF${hex.substring(1)})`;
+        const formatColor = (hex: string) => `Color(0xFF${hex.substring(1)})`;
 
         const lightColors = `
 private val LightColors = lightColorScheme(
@@ -166,16 +166,16 @@ private val DarkColors = darkColorScheme(
         showToast('Exported to ColorScheme.kt');
     };
 
-    const handleFavorite = (seed: string, btn: HTMLButtonElement): void => {
-        const icon = btn.querySelector('.material-icons') as HTMLElement;
+const handleFavorite = (seed: string, btn: HTMLElement) => {
+        const icon = btn.querySelector('.material-icons');
         const idx = favorites.indexOf(seed);
         if (idx > -1) {
             favorites.splice(idx, 1);
-            icon.textContent = 'favorite_border';
+            icon!.textContent = 'favorite_border';
             showToast('Removed from favorites');
         } else {
             favorites.push(seed);
-            icon.textContent = 'favorite';
+            icon!.textContent = 'favorite';
             showToast('Added to favorites');
         }
         localStorage.setItem('md3-favorites', JSON.stringify(favorites));
@@ -186,11 +186,12 @@ private val DarkColors = darkColorScheme(
         if (currentActiveCard) updateMockup(currentActiveCard.paletteData);
     });
 
-    patternList.addEventListener('click', (e: MouseEvent) => {
-        const target = e.target as HTMLElement;
-        const card = target.closest('.pattern-card') as PatternCardElement | null;
+    patternList!.addEventListener('click', (e) => {
+      // @ts-ignore
+        const card = e.target!.closest('.pattern-card');
         if (!card) return;
-        const actionBtn = target.closest('.action-btn') as HTMLButtonElement | null;
+        // @ts-ignore
+        const actionBtn = e.target!.closest('.action-btn');
         if (actionBtn) {
             e.stopPropagation();
             const palette = card.paletteData;
@@ -206,14 +207,15 @@ private val DarkColors = darkColorScheme(
     });
 
     const generateInitialPatterns = async (count = 20) => {
-        patternList.innerHTML = '';
+        patternList!.innerHTML = '';
         for (let i = 0; i < count; i++) {
             const seed = generateRandomHex();
             // @ts-ignore
             const palette = await materialDynamicColors(seed);
             renderPatternCard(palette);
         }
-        const firstCard = patternList.querySelector('.pattern-card') as PatternCardElement | null;
+        const firstCard = patternList!.querySelector('.pattern-card');
+        // @ts-ignore
         if (firstCard) firstCard.click();
     };
 
