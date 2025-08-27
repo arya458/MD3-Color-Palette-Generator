@@ -1,4 +1,3 @@
-
 interface ColorScheme {
     primary: string;
     onPrimary: string;
@@ -48,8 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
         card.className = 'pattern-card';
         card.dataset.seed = palette.seed;
         card.paletteData = palette;
-        const isFavorited = favorites.includes(palette.seed);
-
         card.innerHTML = `
             <div class="pattern-colors">
                 <div class="color-tile" style="background-color:${palette.light.primary}"></div>
@@ -57,11 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="color-tile" style="background-color:${palette.light.tertiary}"></div>
             </div>
             <div class="pattern-info">
-                <span class="seed-color">Color Name : ${palette.seed}</span>
+                <div style="display:flex; flex-direction:column; " >
+                    <span class="seed-color">Color light: ${palette.light.primary}</span>
+                    <span class="seed-color">Color dark: ${palette.dark.primary}</span>
+                </div>
                 <div class="pattern-actions">
-                    <button class="action-btn favorite-btn">
-                        <i class="material-icons">${isFavorited ? 'favorite' : 'favorite_border'}</i>
-                    </button>
                     <button class="action-btn export-kt-btn"><i class="material-icons">code</i></button>
                     <button class="action-btn export-json-btn"><i class="material-icons">data_object</i></button>
                 </div>
