@@ -1,4 +1,4 @@
-import materialDynamicColors from 'material-dynamic-colors';
+"use strict";
 document.addEventListener('DOMContentLoaded', () => {
     const patternList = document.getElementById('pattern-list');
     const darkModeToggle = document.getElementById('darkModeToggle');
@@ -14,32 +14,30 @@ document.addEventListener('DOMContentLoaded', () => {
         card.paletteData = palette;
         const isFavorited = favorites.includes(palette.seed);
         card.innerHTML = `
-      <div class="pattern-colors">
-        <div class="color-tile" style="background-color:${palette.light.primary}"></div>
-        <div class="color-tile" style="background-color:${palette.light.secondary}"></div>
-        <div class="color-tile" style="background-color:${palette.light.tertiary}"></div>
-      </div>
-      <div class="pattern-info">
-        <span class="seed-color">Color Name: ${palette.seed}</span>
-        <div class="pattern-actions">
-          <button class="action-btn favorite-btn">
-            <i class="material-icons">${isFavorited ? 'favorite' : 'favorite_border'}</i>
-          </button>
-          <button class="action-btn export-kt-btn"><i class="material-icons">code</i></button>
-          <button class="action-btn export-json-btn"><i class="material-icons">data_object</i></button>
-        </div>
-      </div>
-    `;
+            <div class="pattern-colors">
+                <div class="color-tile" style="background-color:${palette.light.primary}"></div>
+                <div class="color-tile" style="background-color:${palette.light.secondary}"></div>
+                <div class="color-tile" style="background-color:${palette.light.tertiary}"></div>
+            </div>
+            <div class="pattern-info">
+                <span class="seed-color">Color Name : ${palette.seed}</span>
+                <div class="pattern-actions">
+                    <button class="action-btn favorite-btn">
+                        <i class="material-icons">${isFavorited ? 'favorite' : 'favorite_border'}</i>
+                    </button>
+                    <button class="action-btn export-kt-btn"><i class="material-icons">code</i></button>
+                    <button class="action-btn export-json-btn"><i class="material-icons">data_object</i></button>
+                </div>
+            </div>
+        `;
         patternList.appendChild(card);
     };
     const updateMockup = (palette) => {
         const theme = document.documentElement.classList.contains('dark-theme') ? 'dark' : 'light';
         const colors = palette[theme];
         for (const [key, value] of Object.entries(colors)) {
-            if (typeof value === 'string') {
-                const property = `--md-sys-color-${key.replace(/([A-Z])/g, '-$1').toLowerCase()}`;
-                document.documentElement.style.setProperty(property, value);
-            }
+            const property = `--md-sys-color-${key.replace(/([A-Z])/g, '-$1').toLowerCase()}`;
+            document.documentElement.style.setProperty(property, value);
         }
     };
     const showToast = (msg) => {
@@ -66,55 +64,55 @@ document.addEventListener('DOMContentLoaded', () => {
         const formatColor = (hex) => `Color(0xFF${hex.substring(1)})`;
         const lightColors = `
 private val LightColors = lightColorScheme(
-  primary = ${formatColor(palette.light.primary)},
-  onPrimary = ${formatColor(palette.light.onPrimary || '')},
-  primaryContainer = ${formatColor(palette.light.primaryContainer || '')},
-  onPrimaryContainer = ${formatColor(palette.light.onPrimaryContainer || '')},
-  secondary = ${formatColor(palette.light.secondary)},
-  onSecondary = ${formatColor(palette.light.onSecondary || '')},
-  secondaryContainer = ${formatColor(palette.light.secondaryContainer || '')},
-  onSecondaryContainer = ${formatColor(palette.light.onSecondaryContainer || '')},
-  tertiary = ${formatColor(palette.light.tertiary || '')},
-  onTertiary = ${formatColor(palette.light.onTertiary || '')},
-  tertiaryContainer = ${formatColor(palette.light.tertiaryContainer || '')},
-  onTertiaryContainer = ${formatColor(palette.light.onTertiaryContainer || '')},
-  error = ${formatColor(palette.light.error || '')},
-  onError = ${formatColor(palette.light.onError || '')},
-  errorContainer = ${formatColor(palette.light.errorContainer || '')},
-  onErrorContainer = ${formatColor(palette.light.onErrorContainer || '')},
-  background = ${formatColor(palette.light.background || '')},
-  onBackground = ${formatColor(palette.light.onBackground || '')},
-  surface = ${formatColor(palette.light.surface || '')},
-  onSurface = ${formatColor(palette.light.onSurface || '')},
-  surfaceVariant = ${formatColor(palette.light.surfaceVariant || '')},
-  onSurfaceVariant = ${formatColor(palette.light.onSurfaceVariant || '')},
-  outline = ${formatColor(palette.light.outline || '')}
+    primary = ${formatColor(palette.light.primary)},
+    onPrimary = ${formatColor(palette.light.onPrimary)},
+    primaryContainer = ${formatColor(palette.light.primaryContainer)},
+    onPrimaryContainer = ${formatColor(palette.light.onPrimaryContainer)},
+    secondary = ${formatColor(palette.light.secondary)},
+    onSecondary = ${formatColor(palette.light.onSecondary)},
+    secondaryContainer = ${formatColor(palette.light.secondaryContainer)},
+    onSecondaryContainer = ${formatColor(palette.light.onSecondaryContainer)},
+    tertiary = ${formatColor(palette.light.tertiary)},
+    onTertiary = ${formatColor(palette.light.onTertiary)},
+    tertiaryContainer = ${formatColor(palette.light.tertiaryContainer)},
+    onTertiaryContainer = ${formatColor(palette.light.onTertiaryContainer)},
+    error = ${formatColor(palette.light.error)},
+    onError = ${formatColor(palette.light.onError)},
+    errorContainer = ${formatColor(palette.light.errorContainer)},
+    onErrorContainer = ${formatColor(palette.light.onErrorContainer)},
+    background = ${formatColor(palette.light.background)},
+    onBackground = ${formatColor(palette.light.onBackground)},
+    surface = ${formatColor(palette.light.surface)},
+    onSurface = ${formatColor(palette.light.onSurface)},
+    surfaceVariant = ${formatColor(palette.light.surfaceVariant)},
+    onSurfaceVariant = ${formatColor(palette.light.onSurfaceVariant)},
+    outline = ${formatColor(palette.light.outline)}
 )`;
         const darkColors = `
 private val DarkColors = darkColorScheme(
-  primary = ${formatColor(palette.dark.primary)},
-  onPrimary = ${formatColor(palette.dark.onPrimary || '')},
-  primaryContainer = ${formatColor(palette.dark.primaryContainer || '')},
-  onPrimaryContainer = ${formatColor(palette.dark.onPrimaryContainer || '')},
-  secondary = ${formatColor(palette.dark.secondary)},
-  onSecondary = ${formatColor(palette.dark.onSecondary || '')},
-  secondaryContainer = ${formatColor(palette.dark.secondaryContainer || '')},
-  onSecondaryContainer = ${formatColor(palette.dark.onSecondaryContainer || '')},
-  tertiary = ${formatColor(palette.dark.tertiary || '')},
-  onTertiary = ${formatColor(palette.dark.onTertiary || '')},
-  tertiaryContainer = ${formatColor(palette.dark.tertiaryContainer || '')},
-  onTertiaryContainer = ${formatColor(palette.dark.onTertiaryContainer || '')},
-  error = ${formatColor(palette.dark.error || '')},
-  onError = ${formatColor(palette.dark.onError || '')},
-  errorContainer = ${formatColor(palette.dark.errorContainer || '')},
-  onErrorContainer = ${formatColor(palette.dark.onErrorContainer || '')},
-  background = ${formatColor(palette.dark.background || '')},
-  onBackground = ${formatColor(palette.dark.onBackground || '')},
-  surface = ${formatColor(palette.dark.surface || '')},
-  onSurface = ${formatColor(palette.dark.onSurface || '')},
-  surfaceVariant = ${formatColor(palette.dark.surfaceVariant || '')},
-  onSurfaceVariant = ${formatColor(palette.dark.onSurfaceVariant || '')},
-  outline = ${formatColor(palette.dark.outline || '')}
+    primary = ${formatColor(palette.dark.primary)},
+    onPrimary = ${formatColor(palette.dark.onPrimary)},
+    primaryContainer = ${formatColor(palette.dark.primaryContainer)},
+    onPrimaryContainer = ${formatColor(palette.dark.onPrimaryContainer)},
+    secondary = ${formatColor(palette.dark.secondary)},
+    onSecondary = ${formatColor(palette.dark.onSecondary)},
+    secondaryContainer = ${formatColor(palette.dark.secondaryContainer)},
+    onSecondaryContainer = ${formatColor(palette.dark.onSecondaryContainer)},
+    tertiary = ${formatColor(palette.dark.tertiary)},
+    onTertiary = ${formatColor(palette.dark.onTertiary)},
+    tertiaryContainer = ${formatColor(palette.dark.tertiaryContainer)},
+    onTertiaryContainer = ${formatColor(palette.dark.onTertiaryContainer)},
+    error = ${formatColor(palette.dark.error)},
+    onError = ${formatColor(palette.dark.onError)},
+    errorContainer = ${formatColor(palette.dark.errorContainer)},
+    onErrorContainer = ${formatColor(palette.dark.onErrorContainer)},
+    background = ${formatColor(palette.dark.background)},
+    onBackground = ${formatColor(palette.dark.onBackground)},
+    surface = ${formatColor(palette.dark.surface)},
+    onSurface = ${formatColor(palette.dark.onSurface)},
+    surfaceVariant = ${formatColor(palette.dark.surfaceVariant)},
+    onSurfaceVariant = ${formatColor(palette.dark.onSurfaceVariant)},
+    outline = ${formatColor(palette.dark.outline)}
 )`;
         const fileContent = `package com.example.yourapp.ui.theme
 
@@ -150,10 +148,11 @@ ${darkColors}
             updateMockup(currentActiveCard.paletteData);
     });
     patternList.addEventListener('click', (e) => {
-        const card = e.target.closest('.pattern-card');
+        const target = e.target;
+        const card = target.closest('.pattern-card');
         if (!card)
             return;
-        const actionBtn = e.target.closest('.action-btn');
+        const actionBtn = target.closest('.action-btn');
         if (actionBtn) {
             e.stopPropagation();
             const palette = card.paletteData;
@@ -174,12 +173,8 @@ ${darkColors}
         patternList.innerHTML = '';
         for (let i = 0; i < count; i++) {
             const seed = generateRandomHex();
-            const themePalette = await materialDynamicColors(seed);
-            const palette = {
-                seed,
-                light: themePalette.light,
-                dark: themePalette.dark,
-            };
+            const palette = await MaterialColorUtilities.materialDynamicColors(seed);
+            palette.seed = seed; // Add seed manually
             renderPatternCard(palette);
         }
         const firstCard = patternList.querySelector('.pattern-card');

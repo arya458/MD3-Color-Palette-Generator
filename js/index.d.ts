@@ -1,29 +1,11 @@
-declare global {
-    interface IMaterialDynamicColorsThemeColor {
-        primary: string;
-        secondary: string;
-        tertiary?: string;
-        onPrimary?: string;
-        onSecondary?: string;
-        onTertiary?: string;
-        primaryContainer?: string;
-        onPrimaryContainer?: string;
-        secondaryContainer?: string;
-        onSecondaryContainer?: string;
-        tertiaryContainer?: string;
-        onTertiaryContainer?: string;
-        error?: string;
-        onError?: string;
-        errorContainer?: string;
-        onErrorContainer?: string;
-        background?: string;
-        onBackground?: string;
-        surface?: string;
-        onSurface?: string;
-        surfaceVariant?: string;
-        onSurfaceVariant?: string;
-        outline?: string;
-        [key: string]: any;
-    }
+declare const MaterialColorUtilities: {
+    materialDynamicColors: (seed: string) => Promise<any>;
+};
+interface MaterialColorPalette {
+    seed: string;
+    light: Record<string, string>;
+    dark: Record<string, string>;
 }
-export {};
+interface PatternCardElement extends HTMLDivElement {
+    paletteData: MaterialColorPalette;
+}
