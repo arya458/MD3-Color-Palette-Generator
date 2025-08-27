@@ -1,5 +1,4 @@
-// @ts-ignore
-import * as MaterialColorUtilities from "https://cdn.jsdelivr.net/npm/material-dynamic-colors@1.1.2/dist/cdn/material-dynamic-colors.min.js";
+"use strict";
 document.addEventListener('DOMContentLoaded', () => {
     const patternList = document.getElementById('pattern-list');
     const darkModeToggle = document.getElementById('darkModeToggle');
@@ -165,7 +164,8 @@ private val DarkColors = darkColorScheme(
         patternList.innerHTML = '';
         for (let i = 0; i < count; i++) {
             const seed = generateRandomHex();
-            const palette = await MaterialColorUtilities.materialDynamicColors(seed);
+            // @ts-ignore
+            const palette = await materialDynamicColors(seed);
             renderPatternCard(palette);
         }
         const firstCard = patternList.querySelector('.pattern-card');
