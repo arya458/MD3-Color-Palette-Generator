@@ -1,0 +1,30 @@
+{
+  "name": "md3-color-palette-generator",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/arya458/MD3-Color-Palette-Generator#readme",
+  "bugs": {
+    "url": "https://github.com/arya458/MD3-Color-Palette-Generator/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arya458/MD3-Color-Palette-Generator.git"
+  },
+  "license": "ISC",
+  "author": "arman-danesh/arya458",
+  "type": "commonjs",
+  "main": "script.js",
+  "scripts": {
+    "build": "tsc && sass src/styles/main.scss public/style.css",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch",
+    "sass:watch": "sass --watch src/styles/main.scss public/style.css"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "material-dynamic-colors": "^1.1.2",
+    "sass": "^1.91.0"
+  }
+}

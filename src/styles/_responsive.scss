@@ -1,0 +1,48 @@
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+    overflow-y: auto;
+  }
+
+  .patterns-column {
+    width: 100%;
+    min-width: unset;
+    border-right: none;
+    height: 50vh;
+  }
+
+  .preview-column {
+    height: auto;
+    padding: 24px 12px;
+  }
+
+  .ad-banner {
+    display: none;
+  }
+
+  .phone-mockup {
+    transform: scale(0.9);
+    margin-top: -30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .patterns-column {
+    height: 60vh;
+  }
+
+  .phone-mockup {
+    transform: scale(0.80);
+    margin-top: -80px;
+  }
+
+  .patterns-header {
+    padding: 16px;
+  }
+
+  .logo h1 {
+    font-size: 20px;
+  }
+}
