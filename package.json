@@ -15,10 +15,10 @@
   "type": "commonjs",
   "main": "script.js",
   "scripts": {
-    "build": "tsc && sass src/styles/main.scss public/style.css",
+    "build": "tsc && sass src/styles/main.scss css/style.css",
     "start": "node dist/index.js",
     "dev": "tsc --watch",
-    "sass:watch": "sass --watch src/styles/main.scss public/style.css"
+    "sass:watch": "sass --watch src/styles/main.scss css/style.css"
   },
   "devDependencies": {
     "typescript": "^5.9.2"
