@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="seed-color">Color dark: ${palette.dark.primary}</span>
                 </div>
                 <div class="pattern-actions">
-                    <button class="action-btn export-kt-btn"><i class="material-icons">code</i></button>
+                    <button class="action-btn export-kt-btn"><i class=" ">code</i></button>
                     <button class="action-btn export-json-btn"><i class="material-icons">data_object</i></button>
                 </div>
             </div>
