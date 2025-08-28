@@ -52,7 +52,6 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   transition: background-color 0.3s ease, color 0.3s ease;
-  overflow: hidden;
 }
 
 .material-icons {
@@ -61,14 +60,12 @@ body {
 }
 
 /* --- MAIN LAYOUT --- */
-.container {
+.container-custom {
   display: flex;
   height: 100vh;
 }
 
 .patterns-column {
-  width: 450px;
-  min-width: 400px;
   display: flex;
   flex-direction: column;
   border-right: 1px solid var(--border-color);
@@ -196,8 +193,8 @@ html.dark-theme .pattern-actions button:hover {
 
 /* --- RIGHT COLUMN: MOCKUP & ADS --- */
 .ad-banner {
-  width: 728px;
-  max-width: 90%;
+  width: 100%;
+  max-width: 728px;
   height: 90px;
   background-color: #e0e0e0;
   color: #333;
@@ -416,7 +413,7 @@ html.dark-theme .pattern-actions button:hover {
 
 /* --- RESPONSIVE DESIGN --- */
 @media (max-width: 900px) {
-  .container {
+  .container-custom {
     flex-direction: column;
     height: auto;
     overflow-y: auto;
@@ -430,9 +427,6 @@ html.dark-theme .pattern-actions button:hover {
   .preview-column {
     height: auto;
     padding: 24px 12px;
-  }
-  .ad-banner {
-    display: none;
   }
   .phone-mockup {
     transform: scale(0.9);

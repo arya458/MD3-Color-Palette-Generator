@@ -18,6 +18,7 @@
     "build": "tsc && sass src/styles/main.scss css/style.css",
     "start": "node dist/index.js",
     "dev": "tsc --watch",
+    "serve": "serve .",
     "sass:watch": "sass --watch src/styles/main.scss css/style.css"
   },
   "devDependencies": {
@@ -25,6 +26,7 @@
   },
   "dependencies": {
     "material-dynamic-colors": "^1.1.2",
-    "sass": "^1.91.0"
+    "sass": "^1.91.0",
+    "serve": "^14.2.4"
   }
 }

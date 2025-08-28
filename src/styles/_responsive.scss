@@ -1,6 +1,6 @@
 /* --- RESPONSIVE DESIGN --- */
 @media (max-width: 900px) {
-  .container {
+  .container-custom {
     flex-direction: column;
     height: auto;
     overflow-y: auto;
@@ -16,10 +16,6 @@
   .preview-column {
     height: auto;
     padding: 24px 12px;
-  }
-
-  .ad-banner {
-    display: none;
   }
 
   .phone-mockup {

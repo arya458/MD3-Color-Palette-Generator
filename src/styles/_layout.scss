@@ -1,12 +1,10 @@
 /* --- MAIN LAYOUT --- */
-.container {
+.container-custom {
   display: flex;
   height: 100vh;
 }
 
 .patterns-column {
-  width: 450px;
-  min-width: 400px;
   display: flex;
   flex-direction: column;
   border-right: 1px solid var(--border-color);
