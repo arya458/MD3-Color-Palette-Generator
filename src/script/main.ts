@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentActiveCard: PatternCardElement | null = null;
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('../../sw.js')
+      navigator.serviceWorker.register('/MD3-Color-Palette-Generator/sw.js')
         .then(reg => console.log('Service Worker registered', reg))
         .catch(err => console.error('Service Worker registration failed:', err));
     });
