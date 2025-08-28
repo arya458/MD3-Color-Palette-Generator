@@ -1,11 +1,11 @@
 const CACHE_NAME = 'md3-palette-cache-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/css/style.css',
-  '/js/main.js',
-  '/js/utils.js',
-  '/js/types.js',
+  'https://arya458.github.io/MD3-Color-Palette-Generator/',
+  'https://arya458.github.io/MD3-Color-Palette-Generator/index.html',
+  'https://arya458.github.io/MD3-Color-Palette-Generator/css/style.css',
+  'https://arya458.github.io/MD3-Color-Palette-Generator/js/main.js',
+  'https://arya458.github.io/MD3-Color-Palette-Generator/js/utils.js',
+  'https://arya458.github.io/MD3-Color-Palette-Generator/js/types.js',
 ];
 
 // Install SW and cache resources
