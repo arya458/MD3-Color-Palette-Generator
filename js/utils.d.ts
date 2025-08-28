@@ -1,0 +1,10 @@
+import type { Palette } from './types.js';
+export declare function downloadFile(filename: string, content: string, mime: string): void;
+export declare function showToast(toastElement: HTMLElement, msg: string): void;
+export declare function handleExportJson(palette: Palette, toastElement: HTMLElement): void;
+export declare function handleExportKt(palette: Palette, toastElement: HTMLElement): void;
+export declare function handleExportJs(palette: Palette, toastElement: HTMLElement): void;
+export declare function handleExportTs(palette: Palette, toastElement: HTMLElement): void;
+export declare function handleExportLaravel(palette: Palette, toastElement: HTMLElement): void;
+export declare function handleExportReact(palette: Palette, toastElement: HTMLElement): void;
+export declare function handleExportBlazor(palette: Palette, toastElement: HTMLElement): void;

@@ -1,0 +1,21 @@
+{
+  "name": "MD3 Color Palette Generator",
+  "short_name": "MD3 Palette",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0000FF00",
+  "theme_color": "#0000FF00",
+  "description": "Generate random Material Design 3 tonal palettes from color seeds.",
+  "icons": [
+    {
+      "src": "icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

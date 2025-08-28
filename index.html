@@ -1,34 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Character encoding for the document -->
     <meta charset="UTF-8">
+    <!-- Responsive viewport to ensure proper scaling on mobile devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- faveiocn -->
     <title>MD3 Color Palette Generator</title>
+    <!-- Description for SEO and sharing -->
+    <link rel="icon" sizes="48x48" href="icons/favicon.ico">
+    <!-- Description for SEO and sharing -->
     <meta name="description" content="Generate random Material Design 3 (MD3) tonal palettes from color seeds. Preview on a live mockup and export to Jetpack Compose, JSON, and more.">
+    <!-- Keywords for SEO -->
     <meta name="keywords" content="Material Design 3, MD3, Color Palette, Generator, Jetpack Compose, HCT, Tonal Palette, UI Design, Android">
-    <meta name="author" content="Aria Danesh">
-    <meta name="author" content="Arman Danesh">
+    <!-- Authors of the page -->
+    <meta name="author" content="Aria Danesh , Arman Danesh">
+    <!-- Geographical region (Iran) -->
     <meta name="geo.region" content="IR">
+    <!-- Link to external CSS stylesheet -->
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- Verification meta tags for Google and Microsoft webmaster tools -->
     <meta name="google-site-verification" content="hRsJBUoU1jA6KEGFSo-OCJGlrczQlXEiOtdEFci4lj4" />
     <meta name="msvalidate.01" content="EF77C500FC34798FBD8C2725E8ED42D4" />
+    <!-- Preconnect to Google Fonts for performance optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Google Fonts: Roboto font with multiple weights -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Google Material Icons stylesheet -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Bootstrap 5 CSS from CDN for layout and components -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- manifest -->
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#6200ee" />
+
 </head>
 <body>
 
+<!-- Toast notification container for displaying messages -->
 <div id="toast-notification"></div>
 
+<!-- Main container wrapping the entire app content -->
 <main class="container-custom">
+
+    <!-- Sidebar containing palette patterns and controls -->
     <aside class="patterns-column">
+        <!-- Header with logo and theme toggle -->
         <header class="patterns-header">
             <div class="logo">
                 <h1>MD3 Palette Gen</h1>
                 <p>HCT-Based Color Palettes</p>
             </div>
+            <!-- Theme switcher: light and dark mode icons with toggle checkbox -->
             <div class="theme-switcher">
                 <i class="material-icons">light_mode</i>
                 <label class="switch">
@@ -38,19 +62,30 @@
                 <i class="material-icons">dark_mode</i>
             </div>
         </header>
+
+        <!-- Container for dynamically generated palette pattern cards -->
         <div class="pattern-list-container" id="pattern-list">
         </div>
+
+        <!-- Footer with button to generate more palettes -->
         <footer class="patterns-footer">
             <button id="generate-more-btn">Generate More</button>
         </footer>
     </aside>
 
+    <!-- Main preview area showing mockup and ads -->
     <section class="preview-column">
+        <!-- Advertisement banner area with iframe -->
         <div class="ad-banner">
-            <div id="frame" style="max-width:728px; width: 100%; height:auto;"><iframe data-aa='2408261' src='//ad.a-ads.com/2408261?size=728x90' style='width:100%; height:90px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe><a style="display: block; text-align: right; font-size: 12px;" id="preview-link" href="https://aads.com/campaigns/new/?source_id=2408261&source_type=ad_unit&partner=2408261">Advertise here</a></div>
+            <div id="frame" style="width:100%; height:100%;">
+                <iframe data-aa='2408273' src='//acceptable.a-ads.com/2408273' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
+                <a style="display: block; text-align: right; font-size: 12px;" id="preview-link" href="https://aads.com/campaigns/new/?source_id=2408273&source_type=ad_unit&partner=2408273">Advertise here</a>
+            </div>
         </div>
-     
+
+        <!-- Phone mockup simulating a mobile app UI -->
         <div class="phone-mockup">
+            <!-- Status bar with time and connectivity icons -->
             <div class="status-bar">
                 <span>9:41</span>
                 <div class="status-icons">
@@ -59,13 +94,18 @@
                     <i class="material-icons">battery_full</i>
                 </div>
             </div>
+
+            <!-- App bar with menu, title, and more options icon -->
             <div class="app-bar">
                 <i class="material-icons">menu</i>
                 <h2>App Title</h2>
                 <i class="material-icons">more_vert</i>
             </div>
+
+            <!-- Content area with cards showcasing palette colors -->
             <div class="content-area">
-                <div class="card">
+                <!-- Card using primary container color -->
+                <div class="card card-primary">
                     <h3>Primary Container</h3>
                     <p>This card uses the primary container color. Text inside is 'on-primary-container'.</p>
                     <div class="card-buttons">
@@ -73,18 +113,26 @@
                         <button class="filled-button">Accept</button>
                     </div>
                 </div>
+
+                <!-- Card using secondary container color -->
                 <div class="card secondary">
                     <h3>Secondary Container</h3>
                     <p>This card uses the secondary container color.</p>
                 </div>
+
+                <!-- Card using tertiary container color -->
                 <div class="card tertiary">
                     <h3>Tertiary Container</h3>
                     <p>This card uses the tertiary container color.</p>
                 </div>
             </div>
+
+            <!-- Floating action button (FAB) with plus icon -->
             <div class="fab">
                 <i class="material-icons">add</i>
             </div>
+
+            <!-- Navigation bar with 3 items: Home, Explore, Profile -->
             <div class="nav-bar">
                 <div class="nav-item active">
                     <i class="material-icons">home</i>
@@ -100,34 +148,71 @@
                 </div>
             </div>
         </div>
-         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Launch demo modal
-        </button>
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+        <!-- Modal dialog for download/export options -->
+        <div class="modal fade" id="downloadModal" tabindex="-1" aria-labelledby="downloadModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- Modal header with title and close button -->
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="downloadModalLabel">Download</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <!-- Modal body contains another ad iframe -->
+                    <div class="modal-body d-flex justify-content-center align-items-center">
+                        <div id="frame" style="width:100%; height:100%;">
+                            <iframe data-aa='2408273' src='//acceptable.a-ads.com/2408273' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
+                            <a style="display: block; text-align: right; font-size: 12px;" id="preview-link" href="https://aads.com/campaigns/new/?source_id=2408273&source_type=ad_unit&partner=2408273">Advertise here</a>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer with export format buttons -->
+                    <div class="modal-footer">
+                        <!-- Kotlin export button with code icon -->
+                        <button class="action-btn btn btn-primary px-2 py-1 export-kt-btn">
+                            <i class="material-icons">code</i> Kotlin
+                        </button>
+                        <!-- JSON export button with data_object icon -->
+                        <button class="action-btn btn btn-primary px-2 py-1 export-json-btn">
+                            <i class="material-icons">data_object</i> JSON
+                        </button>
+                        <!-- JavaScript export button, note 'javascript' icon is not official Material Icon fallback -->
+                        <button class="action-btn btn btn-primary px-2 py-1 export-js-btn" type="button">
+                            <i class="material-icons">javascript</i> JavaScript
+                        </button>
+                        <!-- TypeScript export button with code icon -->
+                        <button class="action-btn btn btn-primary px-2 py-1 export-ts-btn" type="button">
+                            <i class="material-icons">code</i> TypeScript
+                        </button>
+                        <!-- Laravel export button with settings_applications icon -->
+                        <button class="action-btn btn btn-primary px-2 py-1 export-laravel-btn" type="button">
+                            <i class="material-icons">settings_applications</i> Laravel
+                        </button>
+                        <!-- React export button with memory icon -->
+                        <button class="action-btn btn btn-primary px-2 py-1 export-react-btn" type="button">
+                            <i class="material-icons">memory</i> React
+                        </button>
+                        <!-- Blazor export button with cloud icon -->
+                        <button class="action-btn btn btn-primary px-2 py-1 export-blazor-btn" type="button">
+                            <i class="material-icons">cloud</i> Blazor
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-        </div>
+    </section>
 </main>
 
+<!-- Import Material Dynamic Colors library (MD3 color generation) -->
 <script type="module" src="https://cdn.jsdelivr.net/npm/material-dynamic-colors@1.1.2/dist/cdn/material-dynamic-colors.min.js"></script>
+<!-- Bootstrap 5 JavaScript bundle for components and modals -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-<script type="module" src="js/index.js"></script>
+<!-- Local module scripts -->
+<script type="module" src="js/types.js"></script>
+<script type="module" src="js/utils.js"></script>
+<script type="module" src="js/materialDynamicColors.js"></script>
+<script type="module" src="js/main.js"></script>
 
 </body>
 </html>

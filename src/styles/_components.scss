@@ -1,7 +1,9 @@
 /* --- COMPONENTS: CARDS, BUTTONS, FAB, NAV --- */
 .card {
-  background-color: var(--md-sys-color-primary-container);
-  color: var(--md-sys-color-on-primary-container);
+  &.card-primary{
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+  }
   padding: 16px;
   border-radius: 12px;
   margin-bottom: 16px;

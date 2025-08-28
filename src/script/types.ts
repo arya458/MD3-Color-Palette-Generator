@@ -1,4 +1,4 @@
-interface ColorScheme {
+export interface ColorScheme {
     primary: string;
     onPrimary: string;
     primaryContainer: string;
@@ -23,11 +23,13 @@ interface ColorScheme {
     onSurfaceVariant: string;
     outline: string;
 }
-interface Palette {
+
+export interface Palette {
     seed: string;
     light: ColorScheme;
     dark: ColorScheme;
 }
-interface PatternCardElement extends HTMLDivElement {
+
+export interface PatternCardElement extends HTMLDivElement {
     paletteData: Palette;
 }

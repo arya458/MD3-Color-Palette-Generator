@@ -72,12 +72,16 @@
 
 .pattern-actions {
   button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
     background: none;
     border: none;
     color: var(--text-color);
     opacity: 0.7;
     cursor: pointer;
-    padding: 4px;
     border-radius: 50%;
     transition: background-color 0.2s, opacity 0.2s;
 
@@ -86,7 +90,6 @@
       opacity: 1;
     }
   }
-
   .material-icons {
     font-size: 20px;
   }

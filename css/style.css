@@ -150,12 +150,16 @@ body {
 }
 
 .pattern-actions button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
   background: none;
   border: none;
   color: var(--text-color);
   opacity: 0.7;
   cursor: pointer;
-  padding: 4px;
   border-radius: 50%;
   transition: background-color 0.2s, opacity 0.2s;
 }
@@ -256,11 +260,13 @@ html.dark-theme .pattern-actions button:hover {
 
 /* --- COMPONENTS: CARDS, BUTTONS, FAB, NAV --- */
 .card {
-  background-color: var(--md-sys-color-primary-container);
-  color: var(--md-sys-color-on-primary-container);
   padding: 16px;
   border-radius: 12px;
   margin-bottom: 16px;
+}
+.card.card-primary {
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
 }
 .card h3 {
   font-size: 18px;
